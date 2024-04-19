@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StackExchange.Redis;
+using System.Drawing.Printing;
 using Test.Application.Dto;
 using Test.Infrastructure.Service;
 
@@ -12,10 +13,13 @@ namespace Test.Application.Controllers
     {
         private readonly IMailService mailService;
         private readonly ICacheService _cacheService;
-        public MailController(IMailService mailService, ICacheService cacheService)
+
+        private readonly ISendOPTService _sendOPTService;
+        public MailController(IMailService mailService, ICacheService cacheService,ISendOPTService sendOPTService)
         {
             this.mailService = mailService;
             _cacheService = cacheService;
+            _sendOPTService = sendOPTService;
         }
 
         [HttpPost("Send")]
@@ -33,19 +37,13 @@ namespace Test.Application.Controllers
             }
 
         }
-        [HttpPost("SendoTP/{mail}")]
+        [HttpPost("SendOTP/{mail}")]
 
         public async Task<IActionResult> SendOTP(string mail)
         {
-            string OTP = GenerateoTP();
-            await mailService.SendEmailAsync(new MailRequest
-            {
-                Body = OTP,
-                Subject = "OTP",
-                ToEmail = mail
-            });
-            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
-            _cacheService.SetData($"OTP", OTP, expirationTime);
+
+
+           await _sendOPTService.SendOtpAsync(mail);
             return Ok();
 
         }
@@ -56,30 +54,16 @@ namespace Test.Application.Controllers
 
         public async Task<IActionResult> VerfiyOTP(string OTP)
         {
-            var cacheData = _cacheService.GetData<string>("OTP");
-            if (cacheData != null)
-            {
-
-                //  var prod= MapperConfig.InitializeAutomapper().Map<productDTO>(cacheData);
-
-                if (cacheData == OTP)
-                    return Ok("Success");
-                else
-                    return NotFound("Not Found !");
-
-            }
-
+            bool verify =await _sendOPTService.VerfiyOTP(OTP);
+            if (verify)
+         
+                return Ok("Success");
             
             return NotFound("Invalid");
 
         }
 
-        private string GenerateoTP()
-        {
-            Random random = new Random();
-            int otp = random.Next(100000, 999999);
-            return otp.ToString();
-        }
+      
     }
 
 }

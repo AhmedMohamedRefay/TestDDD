@@ -29,6 +29,7 @@ builder.Services.AddTransient<IOrderRepository, orderRepository>();
 builder.Services.AddTransient<IUserRepository, userRepository>();
 builder.Services.AddTransient<IMailService, MailService>();
 builder.Services.AddScoped<ICacheService, CacheService>();
+builder.Services.AddScoped<ISendOPTService, SendOTPService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //builder.Services.AddIdentityServer()
 //    .AddInMemoryClients(new List<Client>())
