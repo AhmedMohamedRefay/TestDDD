@@ -21,7 +21,7 @@ namespace Test.Infrastructure.Service
         public async Task SendOtpAsync(string mail)
         {
 
-            string OTP = GenerateoTP();
+            string OTP = GenerateOTP();
             await mailService.SendEmailAsync(new MailRequest
             {
                 Body = OTP,
@@ -51,11 +51,13 @@ namespace Test.Infrastructure.Service
             return false;
 
         }
-        private string GenerateoTP()
+        private string GenerateOTP()
         {
             Random random = new Random();
             int otp = random.Next(100000, 999999);
             return otp.ToString();
         }
+
+       
     }
 }

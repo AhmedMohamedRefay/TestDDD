@@ -16,12 +16,12 @@ namespace Test.Application.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderRepository _orderRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly HttpClient _httpClient;
 
-        public OrderController(IOrderRepository orderRepository, HttpClient httpClient)
+        public OrderController(IUnitOfWork unitOfWork, HttpClient httpClient)
         {
-            _orderRepository = orderRepository;
+            _unitOfWork = unitOfWork;
             _httpClient = httpClient;
         }
 
@@ -61,8 +61,8 @@ namespace Test.Application.Controllers
             var ord = new Order(address);
 
             ord.AddOrderItem(orderitem);
-            _orderRepository.Add(ord);
-            _orderRepository.savechanges();
+            _unitOfWork.OrderRepository.AddAsync(ord);
+            _unitOfWork.save(); 
 
             return Ok(ord);
         }
@@ -70,7 +70,7 @@ namespace Test.Application.Controllers
         [HttpGet("getOrders")]
         public IActionResult getOrders()
         {
-            var orders = MapperConfig.InitializeAutomapper().Map<List<ResponseOrderDTO>>(_orderRepository.GetAll());
+            var orders = MapperConfig.InitializeAutomapper().Map<List<ResponseOrderDTO>>(_unitOfWork.OrderRepository.GetAll());
 
 
             return Ok(orders);
@@ -79,7 +79,7 @@ namespace Test.Application.Controllers
         [HttpGet("getOrder/{id}")]
         public IActionResult getOrder(Guid id)
         {
-            var order = _orderRepository.GetById(id);
+            var order = _unitOfWork.OrderRepository.GetByIdAsync(id);
             if (order == null) { return NotFound("Item not found !"); }
             var ord = MapperConfig.InitializeAutomapper().Map<ResponseOrderDTO>(order);
 

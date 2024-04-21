@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 using Test.Application.AuMapp;
 using Test.Application.Dto;
 using Test.Application.MidleWare;
@@ -19,12 +20,12 @@ namespace Test.Application.Controllers
  
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ICacheService _cacheService;
-        public ProductController(IProductRepository productRepository, ICacheService cacheService)
+        public ProductController(IUnitOfWork unitOfWork, ICacheService cacheService)
 
         {
-            _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
             _cacheService = cacheService;
         }
 
@@ -34,17 +35,18 @@ namespace Test.Application.Controllers
         {
 
             var prod = new Product(productDTO.name, productDTO.description, productDTO.price);
-            _productRepository.Add(prod);
-            _productRepository.SaveChange();
+            _unitOfWork.ProductRepository.AddAsync(prod);
+         
+            _unitOfWork.save();
             return Ok();
         }
        // [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet("getProducts")]
-         public IActionResult GetProducts()
+         public async Task<IActionResult> GetProducts()
         {
-            var prod = MapperConfig.InitializeAutomapper().Map<List<productDTO>>(_productRepository.GetAll());
-
-            return Ok(_productRepository.GetAll());
+            //var prod = MapperConfig.InitializeAutomapper().Map<List<productDTO>>(_unitOfWork.ProductRepository.GetAll());
+            var produts= _unitOfWork.ProductRepository.GetAll();
+            return Ok(produts);
         }
         
         [HttpGet("getProduct/{id}")]
@@ -67,7 +69,7 @@ namespace Test.Application.Controllers
                 
             }
 
-           var filteredData = _productRepository.GetById(id);
+           var filteredData = _unitOfWork.ProductRepository.GetByIdAsync(id);
             var prod2 = MapperConfig.InitializeAutomapper().Map<productDTO>(filteredData);
             var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
             _cacheService.SetData($"{id}_product", prod2, expirationTime);
@@ -77,21 +79,21 @@ namespace Test.Application.Controllers
         }
 
         [HttpPut("updateProduct/{id}")]
-        public IActionResult udateProducts(Guid id, [FromBody]productDTO product)
+        public async Task< IActionResult> udateProducts(Guid id, [FromBody]productDTO product)
         {
 
-            var _product = _productRepository.GetById(id);
+            var _product =  _unitOfWork.ProductRepository.GetByIdAsync(id);
             if (_product != null)
             {
                 //var prod = new Product(product.name,product.description,product.price);
 
-                _product.UpdateProduct(new updateProduct(product.name, product.description, product.price));
+              await  _product.UpdateProduct(new updateProduct(product.name, product.description, product.price));
                 //_product.setName(product.name);
                 //_product.setDscription(product.description);
                 //_product.setPrice(product.price);
 
-                _productRepository.Update(_product);
-                _productRepository.SaveChange();
+                _unitOfWork.ProductRepository.UpdateAsync(_product);
+                _unitOfWork.save(); 
                 return Ok();
             }
             return NotFound("Item not found !");

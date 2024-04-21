@@ -12,7 +12,7 @@ using Test.Infrastructure.DataBase;
 
 namespace Test.Infrastructure.Repository
 {
-    public class userRepository : IUserRepository
+    public class userRepository  
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -25,25 +25,48 @@ namespace Test.Infrastructure.Repository
             _context = context;
         }
 
-        public async Task<ApplicationUser> CreateUser(UserInput userInput)
-        {
+        //public Task AddAsync(ApplicationUser entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-            var user = new ApplicationUser(userInput);
+        //public async Task<ApplicationUser> CreateUser(UserInput userInput)
+        //{
 
-            await _userManager.CreateAsync(user);
+        //    var user = new ApplicationUser(userInput);
+
+        //    await _userManager.CreateAsync(user);
            
-            await _context.SaveChangesAsync();
-            return user;
-        }
+        //    await _context.SaveChangesAsync();
+        //    return user;
+        //}
 
-        public async Task<ApplicationUser> GetUserById(string email)
-        {
-            
-            var user=await _userManager.FindByEmailAsync(email);
-            
-          return user;
-        }
+        //public void Delete(ApplicationUser entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        
+        //public Task<ICollection<ApplicationUser>> GetAll()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Task<ApplicationUser> GetByIdAsync(Guid id)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public async Task<ApplicationUser> GetUserById(string email)
+        //{
+            
+        //    var user=await _userManager.FindByEmailAsync(email);
+            
+        //  return user;
+        //}
+
+        //public void UpdateAsync(ApplicationUser entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

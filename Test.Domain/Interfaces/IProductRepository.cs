@@ -8,19 +8,9 @@ using Test.Domain.ProductAggregation;
 
 namespace Test.Domain.Interfaces
 {
-    public interface IProductRepository
+    public interface IProductRepository :IGenericRepository<Product>
     {
-        IEnumerable<Product> GetAll();
          
-        void Add(Product product);
-
-        void Update(Product product);
-        
-        void Delete(Product product);
-
-        Product GetById(Guid productId);
-
-        void SaveChange();
 
     }
 }

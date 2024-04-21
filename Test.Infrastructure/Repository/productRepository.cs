@@ -9,46 +9,47 @@ using Test.Infrastructure.DataBase;
 
 namespace Test.Infrastructure.Repository
 {
-    public class productRepository : IProductRepository
+    public class productRepository : GnericRepository<Product>, IProductRepository
     {
-        private readonly EcomerceDbContext _context;
-
-        public productRepository(EcomerceDbContext context)
+        public productRepository(EcomerceDbContext dbContext) : base(dbContext)
         {
-            _context = context;
+             
         }
+     
 
-        public void Add(Product Product)
-        {
-            _context.Add(Product);
-        }
+        
 
-        public void Delete(Product Product)
-        {
-            _context.Remove(Product);
-        }
+        //public void Add(Product Product)
+        //{
+        //    _context.Add(Product);
+        //}
 
-        public IEnumerable<Product> GetAll()
-        {
-            return _context.Products.ToList();
-        }
+        //public void Delete(Product Product)
+        //{
+        //    _context.Remove(Product);
+        //}
 
-        public Product GetById(Guid ProductId)
-        {
+        //public IEnumerable<Product> GetAll()
+        //{
+        //    return _context.Products.ToList();
+        //}
 
-            var ord = _context.Products.Find(ProductId);
+        //public Product GetById(Guid ProductId)
+        //{
 
-            return ord ;
-        }
+        //    var ord = _context.Products.Find(ProductId);
 
-        public void Update(Product Product)
-        {
-            _context.Update(Product);
-        }
-        public void SaveChange()
-        {
-            _context.SaveChanges();
-        }
+        //    return ord ;
+        //}
+
+        //public void Update(Product Product)
+        //{
+        //    _context.Update(Product);
+        //}
+        //public void SaveChange()
+        //{
+        //    _context.SaveChanges();
+        //}
     }
     
 }

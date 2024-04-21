@@ -26,7 +26,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<IProductRepository, productRepository>();
 builder.Services.AddTransient<IOrderRepository, orderRepository>();
-builder.Services.AddTransient<IUserRepository, userRepository>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+
+
 builder.Services.AddTransient<IMailService, MailService>();
 builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddScoped<ISendOPTService, SendOTPService>();

@@ -49,7 +49,7 @@ namespace Test.Domain.ProductAggregation
             else this.Price = price;
         }
 
-        public void UpdateProduct(updateProduct update)
+        public async Task UpdateProduct(updateProduct update)
         {
             if (update.Description == null) throw new ArgumentNullException();
             else this.Description = update.Description ;

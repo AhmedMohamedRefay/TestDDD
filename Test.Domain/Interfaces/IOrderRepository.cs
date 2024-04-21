@@ -8,20 +8,10 @@ using Test.Domain.ProductAggregation;
 
 namespace Test.Domain.Interfaces
 {
-    public interface IOrderRepository
+    public interface IOrderRepository : IGenericRepository<Order>
     {
-        IEnumerable<Order> GetAll();
-
-        void Add(Order order);
-
-        void Update(Order order);
-
-        void Delete(Order order);
-
-        Order GetById(Guid orderId);
-
-        void savechanges();
-
+        
+ 
 
     }
 }
