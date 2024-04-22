@@ -40,7 +40,7 @@ namespace Test.Application.Controllers
             _unitOfWork.save();
             return Ok();
         }
-       // [Authorize(AuthenticationSchemes = "Bearer")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet("getProducts")]
          public async Task<IActionResult> GetProducts()
         {

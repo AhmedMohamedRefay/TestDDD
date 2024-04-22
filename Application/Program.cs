@@ -61,7 +61,7 @@ builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.Authenti
 //    {
 //        options.ApiName = "myApi";
 //        options.Authority = "https://localhost:7029";
-//});
+//    });
 builder.Services.AddIdentityServer()
     .AddInMemoryClients(IdentityConfiguration.Clients)
     .AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
