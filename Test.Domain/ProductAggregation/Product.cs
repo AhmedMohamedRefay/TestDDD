@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using Test.Domain.ProductAggregation.Input;
 using Test.Domain.ProductAggregation.updateProductInput;
 using Test.Domain.SeedWork;
+using Test.Domain.Specification;
 
 
 namespace Test.Domain.ProductAggregation
@@ -63,7 +64,8 @@ namespace Test.Domain.ProductAggregation
         }
         private void validate(productInput input)
         {
-            if (input.name == null) throw new ArgumentNullException();
+            var x = new productSpecification().IsSatisfiedBy(this);
+            if (input.name == null ||!x) throw new ArgumentNullException();
             else this.Name = input.name;
 
             if (input.description == null) throw new ArgumentNullException();
