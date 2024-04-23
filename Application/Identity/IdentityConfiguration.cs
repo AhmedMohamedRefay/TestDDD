@@ -43,6 +43,7 @@ namespace Test.Application.Identity
     {
         new IdentityResources.OpenId(),
         new IdentityResources.Profile(),
+        
      
     };
 

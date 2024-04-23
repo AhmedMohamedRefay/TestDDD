@@ -29,7 +29,7 @@ namespace Test.Application.Controllers
             _cacheService = cacheService;
         }
 
-
+        
         [HttpPost("addProduct")]
         public IActionResult addProduct(productDTO productDTO)
         {
@@ -40,7 +40,7 @@ namespace Test.Application.Controllers
             _unitOfWork.save();
             return Ok();
         }
-        [Authorize(AuthenticationSchemes = "Bearer")]
+       [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet("getProducts")]
          public async Task<IActionResult> GetProducts()
         {
@@ -87,7 +87,7 @@ namespace Test.Application.Controllers
             {
                 //var prod = new Product(product.name,product.description,product.price);
 
-              await  _product.UpdateProduct(new updateProduct(product.name, product.description, product.price));
+              _product.UpdateProduct(new updateProduct(product.name, product.description, product.price));
                 //_product.setName(product.name);
                 //_product.setDscription(product.description);
                 //_product.setPrice(product.price);

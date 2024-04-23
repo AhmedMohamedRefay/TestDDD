@@ -50,10 +50,10 @@ namespace Test.Domain.ProductAggregation
             else this.Price = price;
         }
 
-        public async Task UpdateProduct(updateProduct update)
+        public void UpdateProduct(updateProduct update)
         {
             if (update.Description == null) throw new ArgumentNullException();
-            else this.Description = update.Description ;
+            else this.Description = update.Description;
 
             if (update.Name == null) throw new ArgumentNullException();
             else this.Name = update.Name;
@@ -62,10 +62,14 @@ namespace Test.Domain.ProductAggregation
             else this.Price = update.Price;
 
         }
+        private bool isSpecify()
+        {
+            return new productSpecification().IsSatisfiedBy(this);
+        }
         private void validate(productInput input)
         {
-            var x = new productSpecification().IsSatisfiedBy(this);
-            if (input.name == null ||!x) throw new ArgumentNullException();
+             if(!isSpecify()) { throw new ArgumentException("Failed"); }
+            if (input.name == null  ) throw new Exception("some error occure");
             else this.Name = input.name;
 
             if (input.description == null) throw new ArgumentNullException();

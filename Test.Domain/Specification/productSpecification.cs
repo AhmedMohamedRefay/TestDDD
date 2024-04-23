@@ -11,6 +11,7 @@ namespace Test.Domain.Specification
 {
     public class productSpecification : Specification<Product>
     {
+
         public override Expression<Func<Product, bool>> ToExpression()
         {
             return p => p.Name.Length >= 10;

@@ -22,7 +22,7 @@ builder.Services.AddDbContext<EcomerceDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Ecommerce"));
 });
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<EcomerceDbContext>();
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<EcomerceDbContext>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<IProductRepository, productRepository>();
 builder.Services.AddTransient<IOrderRepository, orderRepository>();
@@ -34,20 +34,14 @@ builder.Services.AddTransient<IMailService, MailService>();
 builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddScoped<ISendOPTService, SendOTPService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-//builder.Services.AddIdentityServer()
-//    .AddInMemoryClients(new List<Client>())
-//    .AddInMemoryIdentityResources(new List<IdentityResource>())
-//    .AddInMemoryApiResources(new List<ApiResource>())
-//    .AddInMemoryApiScopes(new List<ApiScope>())
-//    .AddTestUsers(new List<IdentityServer4.Test.TestUser>())
-//    .AddDeveloperSigningCredential();
 
-builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-       .AddIdentityServerAuthentication(options =>
-       {
-           options.ApiName = "myApi";
-           options.Authority = "https://localhost:7029";
-       });
+
+//builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+//       .AddIdentityServerAuthentication(options =>
+//       {
+//           options.ApiName = "myApi";
+//           options.Authority = "https://localhost:7029";
+//       });
 //builder.Services.AddStackExchangeRedisCache(options =>
 //{
 //    options.Configuration = builder.Configuration["RedisCacheUrl"];
@@ -56,12 +50,12 @@ builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.Authenti
 //{
 //    options.Configuration = builder.Configuration.GetValue<string>("CacheSettings:RedisCache");
 //});
-//builder.Services.AddAuthentication("Bearer")
-//    .AddIdentityServerAuthentication("Bearer", options =>
-//    {
-//        options.ApiName = "myApi";
-//        options.Authority = "https://localhost:7029";
-//    });
+builder.Services.AddAuthentication("Bearer")
+    .AddIdentityServerAuthentication("Bearer", options =>
+    {
+        options.ApiName = "myApi";
+        options.Authority = "https://localhost:7029";
+    });
 builder.Services.AddIdentityServer()
     .AddInMemoryClients(IdentityConfiguration.Clients)
     .AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
