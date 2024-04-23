@@ -17,7 +17,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+const string policyName = "CorsPolicy";
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: policyName, builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 builder.Services.AddDbContext<EcomerceDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Ecommerce"));
@@ -76,7 +86,8 @@ if (app.Environment.IsDevelopment())
  app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
 // Register any middleware to report exceptions to a third-party service *after* our ErrorHandlingMiddleware
- 
+app.UseCors(policyName);
+
 app.UseHttpsRedirection();
 
 app.UseIdentityServer();
