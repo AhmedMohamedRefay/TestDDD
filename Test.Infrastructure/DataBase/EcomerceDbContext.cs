@@ -13,7 +13,7 @@ using Test.Domain.UserAggregation;
 
 namespace Test.Infrastructure.DataBase
 {
-    public class EcomerceDbContext:IdentityDbContext<ApplicationUser>
+    public class EcomerceDbContext : DbContext
     {
 
         public EcomerceDbContext(DbContextOptions<EcomerceDbContext> options) : base(options) { }
@@ -21,6 +21,8 @@ namespace Test.Infrastructure.DataBase
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

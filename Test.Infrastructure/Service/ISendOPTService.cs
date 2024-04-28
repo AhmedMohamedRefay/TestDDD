@@ -9,6 +9,6 @@ namespace Test.Infrastructure.Service
     public interface ISendOPTService
     {
         Task SendOtpAsync(string mail);
-        Task<bool> VerfiyOTP(string otp);
+        Task<bool> VerfiyOTP(string mail,string otp);
     }
 }

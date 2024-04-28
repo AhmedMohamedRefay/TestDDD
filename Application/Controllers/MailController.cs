@@ -52,9 +52,9 @@ namespace Test.Application.Controllers
 
         [HttpPost("VerfiyOTP/{OTP}")]
 
-        public async Task<IActionResult> VerfiyOTP(string OTP)
+        public async Task<IActionResult> VerfiyOTP(string mail,string OTP)
         {
-            bool verify =await _sendOPTService.VerfiyOTP(OTP);
+            bool verify =await _sendOPTService.VerfiyOTP(mail,OTP);
             if (verify)
          
                 return Ok("Success");

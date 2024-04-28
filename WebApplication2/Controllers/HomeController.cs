@@ -25,6 +25,7 @@ namespace WebApplication2.Controllers
             var content = await client.GetStringAsync("https://localhost:6001/identity");
 
             ViewBag.Json = JArray.Parse(content).ToString();
+            
             return View("json");
         }
 

@@ -10,7 +10,7 @@ namespace Test.Domain.Interfaces
     {
         public IProductRepository ProductRepository { get; }
         public IOrderRepository OrderRepository { get; }
-        
+        public IUserRepository UserRepository { get; }
 
         public int save();
     }

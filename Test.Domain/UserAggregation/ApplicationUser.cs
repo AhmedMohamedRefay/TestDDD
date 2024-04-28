@@ -8,8 +8,12 @@ using Test.Domain.UserAggregation.Input;
  
 namespace Test.Domain.UserAggregation
 {
-    public  class ApplicationUser:IdentityUser
+    public  class ApplicationUser
     {
+        public Guid Id { get; set; }
+        public string UserName { get;private  set; }
+        public string Password { get; private set; }
+        public string Email { get; private set; }
 
         
 
@@ -18,19 +22,12 @@ namespace Test.Domain.UserAggregation
             
         }
 
-        public ApplicationUser(UserInput input)
+        public ApplicationUser(string userName, string password, string email)
         {
-            Validate(input);
-            
+            UserName = userName;
+            Password = password;
+            Email = email;
         }
-
-        private void Validate(UserInput userInput)
-        {
-            if(userInput.Email != null&&userInput.Password!=null) {
-            
-                this.Email=userInput.Email;
-                this.PasswordHash = userInput.Password;
-            }
-        }
+         
     }
 }

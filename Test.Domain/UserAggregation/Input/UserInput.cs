@@ -9,6 +9,10 @@ namespace Test.Domain.UserAggregation.Input
 {
     public class UserInput
     {
+
+        [Required]
+        [MaxLength(40),MinLength(5)]
+        public string UserName { get; set; }
         [Required]
         [EmailAddress]
         public string Email { set; get; }

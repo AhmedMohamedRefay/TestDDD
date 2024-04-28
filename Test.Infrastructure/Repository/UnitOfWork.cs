@@ -14,19 +14,19 @@ namespace Test.Infrastructure.Repository
         private readonly EcomerceDbContext _context;
 
         public UnitOfWork(EcomerceDbContext context, IProductRepository productRepository, 
-            IOrderRepository orderRepository)
+            IOrderRepository orderRepository, IUserRepository userRepository)
         {
             _context = context;
             ProductRepository = productRepository;
             OrderRepository = orderRepository;
-           
+            UserRepository = userRepository;
         }
 
         public IProductRepository ProductRepository { get; private set; }
 
         public IOrderRepository OrderRepository { get; private set; } 
 
-        
+        public IUserRepository UserRepository { get; private set; }
         public int save()
         {
            return _context.SaveChanges();

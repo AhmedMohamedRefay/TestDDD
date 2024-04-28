@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Test.Application.Dto;
 using Test.Application.MidleWare;
 using Test.Domain.Interfaces;
+using Test.Domain.UserAggregation;
 using Test.Domain.UserAggregation.Input;
+using Test.Infrastructure.Service;
 
 namespace Test.Application.Controllers
 {
@@ -10,24 +13,33 @@ namespace Test.Application.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        //private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
+        public UserController(IUnitOfWork  unitOfWork,IUserService userService)
+        {
+            _unitOfWork = unitOfWork;
+            _userService = userService;
+        }
 
-        //public UserController(IUserRepository userRepository)
-        //{
-        //    _userRepository = userRepository;
-        //}
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(UserInput input)
+        {
+            var user = new ApplicationUser(input.UserName,input.Password,input.Email);
+            await _unitOfWork.UserRepository.AddAsync(user);
 
-        //[HttpPost("Register")]
-        //public async Task<IActionResult> Register(UserInput input)
-        //{
-        //    var us = await _userRepository.GetUserById(input.Email);
-        //    if (us != null)
-        //        throw new BadRequestException("user already exists !");
-        //    else
-        //    {
-        //        var user = await _userRepository.CreateUser(input);
-        //        return Ok(user);
-        //    }
-        //}
+            _unitOfWork.save();
+             return Ok(user);
+            
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(UserLoginDto input)
+        {
+          
+           string token= await _userService.Login(input.Email, input.Password);
+
+            return Ok(token);
+
+        }
     }
 }

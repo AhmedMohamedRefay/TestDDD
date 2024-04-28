@@ -29,12 +29,11 @@ namespace Test.Infrastructure.Service
                 ToEmail = mail
             });
             var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
-            _cacheService.SetData($"OTP", OTP, expirationTime);
-        }
-
-        public async Task<bool> VerfiyOTP(string OTP)
+            _cacheService.SetData($"{mail}-OTP", OTP, expirationTime);
+        } 
+        public async Task<bool> VerfiyOTP(string mail,string OTP)
         {
-            var cacheData = _cacheService.GetData<string>("OTP");
+            var cacheData = _cacheService.GetData<string>($"{mail}-OTP");
             if (cacheData != null)
             {
 
