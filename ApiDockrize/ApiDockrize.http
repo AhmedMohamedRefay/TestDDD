@@ -1,0 +1,6 @@
+@ApiDockrize_HostAddress = http://localhost:5207
+
+GET {{ApiDockrize_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
