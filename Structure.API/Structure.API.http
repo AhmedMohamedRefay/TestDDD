@@ -1,0 +1,6 @@
+@Structure.API_HostAddress = http://localhost:5294
+
+GET {{Structure.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
