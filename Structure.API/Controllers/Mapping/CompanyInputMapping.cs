@@ -1,5 +1,5 @@
 ﻿using Structure.API.Controllers.Request;
-using Structure.Domain.CompanyAggregate.Input;
+using Structure.Domain.Aggregate.CompanyAggregate.Input;
 
 namespace Structure.API.Controllers.Mapping
 {

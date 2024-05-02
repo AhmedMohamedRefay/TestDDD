@@ -1,15 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Structure.API.Controllers.Request
+namespace Structure.Domain.Aggregate.CompanyAggregate.Input
 {
-    public class addCompany
+
+    public class CompanyInput
     {
-        
-        public string Name { get;  set; }
+        [Required]
+        public Guid Id { get; set; }
+        [Required]
+
+        public string Name { get; set; }
 
 
         public string? Description { get; set; }
+
 
 
         public DateTime? CommercialRegistrationStartDate { get; set; }
@@ -23,13 +32,11 @@ namespace Structure.API.Controllers.Request
 
         public string? InstitutionNumber { get; set; }
 
-       
 
-        [RegularExpression(@"^(\d{3}-\d{3}-\d{3})|(\d{9})$")]
         public string? SocialInsuranceSubscriptionNumber { get; set; }
 
-        [FileExtensions(Extensions = "jpg,jpeg,png")]
-        public IFormFile? Logo { get; set; }
+
+
         public string? LogoPath { get; set; }
 
         public string? Website { get; set; }
@@ -43,5 +50,6 @@ namespace Structure.API.Controllers.Request
         public Guid? CFO { get; set; }
 
         public Guid? CMO { get; set; }
+
     }
 }

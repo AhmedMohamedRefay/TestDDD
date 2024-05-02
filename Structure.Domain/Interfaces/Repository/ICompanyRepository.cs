@@ -1,4 +1,4 @@
-﻿using Structure.Domain.CompanyAggregate.Models;
+﻿using Structure.Domain.Aggregate.CompanyAggregate.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +11,7 @@ namespace Structure.Domain.Interfaces.Repository
     {
         Task<Company> Addcompany(Company company);
         Task<Company> GetCompanyProfile(Guid Id);
+
+        string GetStatusName(int Id);
     }
 }

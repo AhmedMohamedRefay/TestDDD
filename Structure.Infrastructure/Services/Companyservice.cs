@@ -15,7 +15,7 @@ namespace Structure.Infrastructure.Services
              
             var folderName = Path.Combine("Resources", "Images");
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-            if (file.Length > 0)
+            if (file.Length > 0&& file.Length<=1000000)
             {
                 var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                 var fullPath = Path.Combine(pathToSave, fileName);

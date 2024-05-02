@@ -18,4 +18,9 @@
     <ProjectReference Include="..\Structure.Domain\Structure.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityConfigurations\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>

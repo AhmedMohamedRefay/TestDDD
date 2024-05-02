@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Structure.Domain.CompanyAggregate.Models;
+using Structure.Domain.Aggregate.CompanyAggregate.Models;
 using Structure.Domain.Interfaces.Repository;
 using Structure.Infrastructure.DataBase;
 using System;
@@ -26,6 +26,10 @@ namespace Structure.Infrastructure.Repository.CompanyRepository
             {
                 company.addStatus(1);
             }
+            if(company.SocialInsuranceSubscriptionNumber!=null)
+            {
+                company.setInsuranceNumber(company.SocialInsuranceSubscriptionNumber);
+            }
             await _context.SaveChangesAsync();
             return company;
         }
@@ -35,6 +39,11 @@ namespace Structure.Infrastructure.Repository.CompanyRepository
             var company_profile = await _context.companies.Include(e=>e.Status).FirstAsync(x=>x.Id==Id);
 
             return company_profile;
+        }
+
+        public string GetStatusName(int Id)
+        {
+            return _context.companyStatuses.Where(s => s.Id == Id).Select(s => s.Name).FirstOrDefault();
         }
     }
 }

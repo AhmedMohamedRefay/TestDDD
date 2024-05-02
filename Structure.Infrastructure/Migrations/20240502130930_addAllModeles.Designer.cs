@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Structure.Infrastructure.DataBase;
@@ -11,9 +12,11 @@ using Structure.Infrastructure.DataBase;
 namespace Structure.Infrastructure.Migrations
 {
     [DbContext(typeof(StructureContext))]
-    partial class StructureContextModelSnapshot : ModelSnapshot
+    [Migration("20240502130930_addAllModeles")]
+    partial class addAllModeles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,7 +149,7 @@ namespace Structure.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompanyEmployeeStatus", "Structure");
+                    b.ToTable("CompanyEmployeeStatuses");
                 });
 
             modelBuilder.Entity("Structure.Domain.CompanyEmployeeInfromationAggregate.Lookup.InjuryTypes", b =>
@@ -163,7 +166,7 @@ namespace Structure.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InjuryTypes", "Structure");
+                    b.ToTable("InjuryTypes");
                 });
 
             modelBuilder.Entity("Structure.Domain.CompanyEmployeeInfromationAggregate.Lookup.Role", b =>
@@ -195,7 +198,7 @@ namespace Structure.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role", "Structure");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Structure.Domain.CompanyEmployeeInfromationAggregate.Lookup.TerminationReasons", b =>
@@ -212,7 +215,7 @@ namespace Structure.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TerminationReasons", "Structure");
+                    b.ToTable("TerminationReasons");
                 });
 
             modelBuilder.Entity("Structure.Domain.CompanyEmployeeInfromationAggregate.Models.CompaniesEmployeeInformations", b =>
@@ -395,7 +398,7 @@ namespace Structure.Infrastructure.Migrations
 
                     b.HasIndex("CompaniesEmployeeInformationsEmployeeId", "CompaniesEmployeeInformationsCompanyId");
 
-                    b.ToTable("InjuryAndDeathRegistration", "Structure");
+                    b.ToTable("InjuryAndDeathRegistrations");
                 });
 
             modelBuilder.Entity("Structure.Domain.DepartmentJobsAggregate.Models.DepartmentsJobs", b =>
