@@ -1,5 +1,6 @@
 ﻿using Structure.API.Controllers.Request;
 using Structure.Domain.Aggregate.CompanyAggregate.Input;
+using Structure.Domain.Aggregate.CompanyAggregate.Models;
 
 namespace Structure.API.Controllers.Mapping
 {
@@ -46,5 +47,7 @@ namespace Structure.API.Controllers.Mapping
 
             return input;
         }
+
+        
     }
 }

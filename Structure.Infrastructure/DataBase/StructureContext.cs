@@ -13,8 +13,10 @@ using Structure.Domain.Aggregate.JobAggregate.Models;
 using Structure.Domain.Aggregate.OccupationAggregate.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,6 +37,8 @@ namespace Structure.Infrastructure.DataBase
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //Configure Primary Key using HasKey method
             modelBuilder.Entity<CompaniesEmployeeInformations>().HasKey(s => new { s.EmployeeId, s.CompanyId });
 
@@ -55,6 +59,9 @@ namespace Structure.Infrastructure.DataBase
            .HasOne(s => s.CompaniesEmployeeInformations)
            .WithMany(g => g.employeePositions)
            .HasForeignKey(s => new { s.CompanyId, s.EmployeeId });
+
+
+
 
 
 

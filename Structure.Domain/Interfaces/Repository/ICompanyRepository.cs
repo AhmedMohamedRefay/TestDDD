@@ -12,6 +12,7 @@ namespace Structure.Domain.Interfaces.Repository
         Task<Company> Addcompany(Company company);
         Task<Company> GetCompanyProfile(Guid Id);
 
+        Task<Company> updateCompany( Company company);
         string GetStatusName(int Id);
     }
 }

@@ -54,7 +54,23 @@ namespace Structure.Domain.Aggregate.CompanyAggregate.Models
             _companies = new List<Company>();
 
         }
+        public Company updateCompany(Guid id,string Name,string Description, string CommercialRegisterationNo,
+           string SocialInsuranceSubscriptionNumber, DateTime? CommercialRegistrationStartDate
+            , string? UnifiedNationalNumber, DateTime? CommercialRegistrationExpireDate)
+        {
+            return new Company
+            {
+                Id = id,
+                Name = Name,
+                Description = Description,
+                CommercialRegistrationExpireDate = CommercialRegistrationExpireDate,
+                CommercialRegistrationNumber = CommercialRegisterationNo,
+                SocialInsuranceSubscriptionNumber = SocialInsuranceSubscriptionNumber,
+                CommercialRegistrationStartDate = CommercialRegistrationStartDate,
+                UnifiedNationalNumber = UnifiedNationalNumber,
 
+            };
+        }
         public string Name { get; private set; }
         public string? Description { get; private set; }
 
@@ -134,10 +150,16 @@ namespace Structure.Domain.Aggregate.CompanyAggregate.Models
 
         public void AddSubSidary(Company company)
         {
+            company.ParentId = this.Id;
             _companies.Add(company);
         }
 
 
+        public void addDepartment(Department department)
+        {
+            
+            _departments.Add(department);
+        }
 
         public void addStatus(int statusID)
         {

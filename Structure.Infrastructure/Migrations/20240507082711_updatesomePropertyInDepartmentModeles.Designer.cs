@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Structure.Infrastructure.DataBase;
@@ -11,9 +12,11 @@ using Structure.Infrastructure.DataBase;
 namespace Structure.Infrastructure.Migrations
 {
     [DbContext(typeof(StructureContext))]
-    partial class StructureContextModelSnapshot : ModelSnapshot
+    [Migration("20240507082711_updatesomePropertyInDepartmentModeles")]
+    partial class updatesomePropertyInDepartmentModeles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,10 +242,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<DateTime?>("EditedBy")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("EmploymentContractInDays")
                         .HasColumnType("integer");
 
@@ -255,15 +254,8 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsFirstLogin")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("IsTerminated")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<decimal>("Performance")
                         .HasColumnType("numeric");
@@ -577,9 +569,6 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.HasIndex("ParentId");
 

@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿ using Microsoft.EntityFrameworkCore;
 using Structure.Domain.Aggregate.CompanyAggregate.Models;
+using Structure.Domain.Aggregate.DepartmentsaAggregate.Models;
 using Structure.Domain.Interfaces.Repository;
 using Structure.Infrastructure.DataBase;
 using System;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Structure.Infrastructure.Repository.CompanyRepository
 {
-    public class CompanyRepository : ICompanyRepository
+    public class companyRepository : ICompanyRepository
     {
         private readonly StructureContext _context;
 
-        public CompanyRepository(StructureContext context)
+        public companyRepository(StructureContext context)
         {
             _context = context;
         }
@@ -30,6 +31,12 @@ namespace Structure.Infrastructure.Repository.CompanyRepository
             {
                 company.setInsuranceNumber(company.SocialInsuranceSubscriptionNumber);
             }
+
+            
+            Department department = new Department();
+            department.setHigherManagerName();
+            department.setCompany(company);
+            await _context.Departments.AddAsync(department);
             await _context.SaveChangesAsync();
             return company;
         }
@@ -44,6 +51,19 @@ namespace Structure.Infrastructure.Repository.CompanyRepository
         public string GetStatusName(int Id)
         {
             return _context.companyStatuses.Where(s => s.Id == Id).Select(s => s.Name).FirstOrDefault();
+        }
+
+        public async Task<Company> updateCompany( Company company)
+        {
+             var comp=_context.companies.Where(x=>x.Id==company.Id).Select(e=>e.Id).FirstOrDefault();
+            if(comp!=null)
+            {
+                _context.companies.Update(company);
+               await _context.SaveChangesAsync();
+                return company;
+            }
+            throw new Exception("Not Found");
+
         }
     }
 }

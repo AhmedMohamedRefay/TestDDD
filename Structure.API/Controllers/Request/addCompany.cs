@@ -28,7 +28,7 @@ namespace Structure.API.Controllers.Request
         [RegularExpression(@"^(\d{3}-\d{3}-\d{3})|(\d{9})$")]
         public string? SocialInsuranceSubscriptionNumber { get; set; }
 
-        [FileExtensions(Extensions = "jpg,jpeg,png")]
+        //[FileExtensions(Extensions = "jpg,jpeg,png")]
         public IFormFile? Logo { get; set; }
         public string? LogoPath { get; set; }
 

@@ -34,8 +34,7 @@ namespace Structure.Domain.Aggregate.CompanyAggregate.Input
 
 
         public string? SocialInsuranceSubscriptionNumber { get; set; }
-
-
+ 
 
         public string? LogoPath { get; set; }
 

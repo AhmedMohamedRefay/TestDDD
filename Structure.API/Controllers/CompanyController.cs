@@ -19,12 +19,12 @@ namespace Structure.API.Controllers
     [ApiController]
     public class CompanyController : ControllerBase
     {
-        private readonly ICompanyRepository _companyRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         private readonly ICompanyservice _companyservice;
-        public CompanyController(ICompanyRepository companyRepository, ICompanyservice companyservice)
+        public CompanyController(IUnitOfWork unitOfWork, ICompanyservice companyservice)
         {
-            _companyRepository = companyRepository;
+            _unitOfWork = unitOfWork;
             _companyservice = companyservice;
         }
 
@@ -39,7 +39,7 @@ namespace Structure.API.Controllers
             input.LogoPath = path;
             var comp = new Company(input);
 
-            var resut = await _companyRepository.Addcompany(comp);
+            var resut = await _unitOfWork.CompanyRepository.Addcompany(comp);
 
             return Ok(resut);
         }
@@ -48,7 +48,7 @@ namespace Structure.API.Controllers
         public async Task<IActionResult> getCompanyProfile(Guid Id)
         {
 
-            var company = _companyRepository.GetCompanyProfile(Id);
+            var company = _unitOfWork.CompanyRepository.GetCompanyProfile(Id);
             //    var x = company.Result.Name;
 
 
@@ -62,7 +62,7 @@ namespace Structure.API.Controllers
                 companyProfile.Description = company.Result.Description;
                 companyProfile.SocialInsuranceSubscriptionNumber = company.Result.SocialInsuranceSubscriptionNumber;
                 companyProfile.UnifiedNationalNumber = company.Result.UnifiedNationalNumber;
-                companyProfile.statusName = _companyRepository.GetStatusName(company.Result.StatusId);
+                companyProfile.statusName = _unitOfWork.CompanyRepository.GetStatusName(company.Result.StatusId);
                 companyProfile.CompanyType = company.Result.ParentId == null ? "Main" : "sub";
 
 
@@ -75,6 +75,19 @@ namespace Structure.API.Controllers
             }
             return NotFound("Item not found!");
 
+        }
+
+        [HttpPatch("UpdateCompanyProfile")]
+        public async Task<IActionResult> updateCompany([FromBody] updateCompanyDto companyDto)
+        {
+
+           Company company=new Company();
+           company= company.updateCompany(companyDto.Id,companyDto.Name,companyDto.Description,companyDto.CommercialRegisterationNo,
+                companyDto.SocialInsuranceSubscriptionNumber,companyDto.CommercialRegistrationStartDate,companyDto.UnifiedNationalNumber,companyDto.CommercialRegistrationExpireDate);
+          
+            var result = await _unitOfWork.CompanyRepository.updateCompany(company);
+
+            return Ok(result);
         }
     }
 }

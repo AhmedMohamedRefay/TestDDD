@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Structure.Infrastructure.DataBase;
@@ -11,9 +12,11 @@ using Structure.Infrastructure.DataBase;
 namespace Structure.Infrastructure.Migrations
 {
     [DbContext(typeof(StructureContext))]
-    partial class StructureContextModelSnapshot : ModelSnapshot
+    [Migration("20240507144743_adding_somePropertiestoUserCompanyTabled")]
+    partial class adding_somePropertiestoUserCompanyTabled
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,9 +256,6 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsFirstLogin")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsTerminated")

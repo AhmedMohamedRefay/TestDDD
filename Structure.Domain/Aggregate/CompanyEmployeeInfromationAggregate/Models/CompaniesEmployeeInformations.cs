@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,11 @@ namespace Structure.Domain.Aggregate.CompanyEmployeeInfromationAggregate.Models
 
         public bool IsTerminated { get; private set; }
 
+        public string Password {  get; private set; }
+
+        public string Email {  get; private set; }
+
+        public bool IsFirstLogin { get; private set; } = false;
         public int RoleId { get; private set; }
 
         public int StatusId { get; private set; }
@@ -51,5 +57,10 @@ namespace Structure.Domain.Aggregate.CompanyEmployeeInfromationAggregate.Models
 
         private readonly List<InjuryAndDeathRegistration> _injuryAndDeathRegistrations;
         public virtual IReadOnlyCollection<InjuryAndDeathRegistration> injuryAndDeathRegistrations => _injuryAndDeathRegistrations;
+
+        public void ChangeFirstLoginStatus()
+        {
+            this.IsFirstLogin = false;
+        }
     }
 }

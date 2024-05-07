@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Structure.API.Extensions;
 using Structure.Domain.Interfaces.Repository;
 using Structure.Infrastructure.DataBase;
 using Structure.Infrastructure.Repository.CompanyRepository;
@@ -16,8 +17,9 @@ builder.Services.AddDbContext<StructureContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("HR"));
 });
-builder.Services.AddScoped<ICompanyRepository,CompanyRepository>();
-builder.Services.AddScoped<ICompanyservice, Companyservice>();
+builder.Services.Repositoryconfig(builder.Configuration);
+builder.Services.Serviceconfig(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
