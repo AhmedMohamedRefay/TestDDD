@@ -21,6 +21,7 @@ namespace Structure.Domain.Aggregate.CompanyAggregate.Models
         public Company()
         {
             Status = new CompanyStatus();
+            _companies = new List<Company>();
         }
         public Company(CompanyInput input)
         {
@@ -52,25 +53,33 @@ namespace Structure.Domain.Aggregate.CompanyAggregate.Models
             Status = new CompanyStatus();
             _companiesEmployeeInformations = new List<CompaniesEmployeeInformations>();
             _companies = new List<Company>();
+            ParentId=input.ParentId;
 
         }
-        public Company updateCompany(Guid id,string Name,string Description, string CommercialRegisterationNo,
-           string SocialInsuranceSubscriptionNumber, DateTime? CommercialRegistrationStartDate
-            , string? UnifiedNationalNumber, DateTime? CommercialRegistrationExpireDate)
+        public void updateCompany(
+                                     string Name,string Description, string CommercialRegisterationNo
+                                     ,string SocialInsuranceSubscriptionNumber, DateTime? CommercialRegistrationStartDate
+                                     ,string? UnifiedNationalNumber, DateTime? CommercialRegistrationExpireDate
+                                    )
         {
-            return new Company
-            {
-                Id = id,
-                Name = Name,
-                Description = Description,
-                CommercialRegistrationExpireDate = CommercialRegistrationExpireDate,
-                CommercialRegistrationNumber = CommercialRegisterationNo,
-                SocialInsuranceSubscriptionNumber = SocialInsuranceSubscriptionNumber,
-                CommercialRegistrationStartDate = CommercialRegistrationStartDate,
-                UnifiedNationalNumber = UnifiedNationalNumber,
 
-            };
+            this.Name = Name;
+            this.Description = Description;
+            this.CommercialRegistrationExpireDate = CommercialRegistrationExpireDate;
+            this.CommercialRegistrationNumber = CommercialRegisterationNo;
+            this.SocialInsuranceSubscriptionNumber = SocialInsuranceSubscriptionNumber;
+            this.CommercialRegistrationStartDate = CommercialRegistrationStartDate;
+            this.UnifiedNationalNumber = UnifiedNationalNumber;
+            this.UpdatedAt = DateTime.UtcNow;
         }
+
+      
+
+        public void setUpdatedAt()
+        {
+            UpdatedAt = DateTime.UtcNow;
+        }
+
         public string Name { get; private set; }
         public string? Description { get; private set; }
 
@@ -150,7 +159,7 @@ namespace Structure.Domain.Aggregate.CompanyAggregate.Models
 
         public void AddSubSidary(Company company)
         {
-            company.ParentId = this.Id;
+            //company.ParentId = this.Id;
             _companies.Add(company);
         }
 

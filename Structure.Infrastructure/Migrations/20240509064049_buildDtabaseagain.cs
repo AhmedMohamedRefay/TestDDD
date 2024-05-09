@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Structure.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class addAllModeles : Migration
+    public partial class buildDtabaseagain : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,8 @@ namespace Structure.Infrastructure.Migrations
                 name: "Structure");
 
             migrationBuilder.CreateTable(
-                name: "CompanyEmployeeStatuses",
+                name: "CompanyEmployeeStatus",
+                schema: "Structure",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -25,7 +26,7 @@ namespace Structure.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CompanyEmployeeStatuses", x => x.Id);
+                    table.PrimaryKey("PK_CompanyEmployeeStatus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,6 +90,7 @@ namespace Structure.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "InjuryTypes",
+                schema: "Structure",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -124,8 +126,8 @@ namespace Structure.Infrastructure.Migrations
                     Description = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -162,7 +164,8 @@ namespace Structure.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Roles",
+                name: "Role",
+                schema: "Structure",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -170,17 +173,18 @@ namespace Structure.Infrastructure.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.PrimaryKey("PK_Role", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "TerminationReasons",
+                schema: "Structure",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -220,8 +224,8 @@ namespace Structure.Infrastructure.Migrations
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -276,8 +280,8 @@ namespace Structure.Infrastructure.Migrations
                     OccupationId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -318,8 +322,8 @@ namespace Structure.Infrastructure.Migrations
                     CountryId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -376,8 +380,8 @@ namespace Structure.Infrastructure.Migrations
                     EmployeeId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -406,13 +410,16 @@ namespace Structure.Infrastructure.Migrations
                     Performance = table.Column<decimal>(type: "numeric", nullable: false),
                     ContractDocomentPath = table.Column<string>(type: "text", nullable: false),
                     IsTerminated = table.Column<bool>(type: "boolean", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    IsFirstLogin = table.Column<bool>(type: "boolean", nullable: false),
                     RoleId = table.Column<int>(type: "integer", nullable: false),
                     StatusId = table.Column<int>(type: "integer", nullable: false),
-                   
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -426,9 +433,10 @@ namespace Structure.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CompaniesEmployeeInformations_CompanyEmployeeStatuses_Statu~",
+                        name: "FK_CompaniesEmployeeInformations_CompanyEmployeeStatus_StatusId",
                         column: x => x.StatusId,
-                        principalTable: "CompanyEmployeeStatuses",
+                        principalSchema: "Structure",
+                        principalTable: "CompanyEmployeeStatus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -439,9 +447,10 @@ namespace Structure.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CompaniesEmployeeInformations_Roles_RoleId",
+                        name: "FK_CompaniesEmployeeInformations_Role_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Roles",
+                        principalSchema: "Structure",
+                        principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -460,8 +469,8 @@ namespace Structure.Infrastructure.Migrations
                     DocumentTypeId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -500,8 +509,8 @@ namespace Structure.Infrastructure.Migrations
                     GenderId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -553,8 +562,8 @@ namespace Structure.Infrastructure.Migrations
                     EmployeeId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -576,31 +585,27 @@ namespace Structure.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Logo = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Logo = table.Column<string>(type: "text", nullable: true),
                     OfficePhoneNumber = table.Column<string>(type: "text", nullable: true),
                     ParentId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ManagerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ManagerId = table.Column<Guid>(type: "uuid", nullable: true),
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EmployeeInformationsEmployeeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EmployeeInformationsCompanyId = table.Column<Guid>(type: "uuid", nullable: false),
-                    departmentId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Department", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Department_CompaniesEmployeeInformations_EmployeeInformatio~",
-                        columns: x => new { x.EmployeeInformationsEmployeeId, x.EmployeeInformationsCompanyId },
+                        name: "FK_Department_CompaniesEmployeeInformations_CompanyId_ManagerId",
+                        columns: x => new { x.CompanyId, x.ManagerId },
                         principalSchema: "Structure",
                         principalTable: "CompaniesEmployeeInformations",
-                        principalColumns: new[] { "EmployeeId", "CompanyId" },
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumns: new[] { "EmployeeId", "CompanyId" });
                     table.ForeignKey(
                         name: "FK_Department_Companies_CompanyId",
                         column: x => x.CompanyId,
@@ -609,12 +614,11 @@ namespace Structure.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Department_Department_departmentId",
-                        column: x => x.departmentId,
+                        name: "FK_Department_Department_ParentId",
+                        column: x => x.ParentId,
                         principalSchema: "Structure",
                         principalTable: "Department",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -633,8 +637,8 @@ namespace Structure.Infrastructure.Migrations
                     CompaniesEmployeeInformationsCompanyId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -650,13 +654,15 @@ namespace Structure.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_EmployeeServiceTermination_TerminationReasons_TerminationRe~",
                         column: x => x.TerminationReasonsId,
+                        principalSchema: "Structure",
                         principalTable: "TerminationReasons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "InjuryAndDeathRegistrations",
+                name: "InjuryAndDeathRegistration",
+                schema: "Structure",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -672,23 +678,24 @@ namespace Structure.Infrastructure.Migrations
                     InjuryTypesId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InjuryAndDeathRegistrations", x => x.Id);
+                    table.PrimaryKey("PK_InjuryAndDeathRegistration", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InjuryAndDeathRegistrations_CompaniesEmployeeInformations_C~",
+                        name: "FK_InjuryAndDeathRegistration_CompaniesEmployeeInformations_Co~",
                         columns: x => new { x.CompaniesEmployeeInformationsEmployeeId, x.CompaniesEmployeeInformationsCompanyId },
                         principalSchema: "Structure",
                         principalTable: "CompaniesEmployeeInformations",
                         principalColumns: new[] { "EmployeeId", "CompanyId" },
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InjuryAndDeathRegistrations_InjuryTypes_InjuryTypesId",
+                        name: "FK_InjuryAndDeathRegistration_InjuryTypes_InjuryTypesId",
                         column: x => x.InjuryTypesId,
+                        principalSchema: "Structure",
                         principalTable: "InjuryTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -709,8 +716,8 @@ namespace Structure.Infrastructure.Migrations
                     FamilyInformationId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -745,8 +752,8 @@ namespace Structure.Infrastructure.Migrations
                     DepartmentId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -777,11 +784,11 @@ namespace Structure.Infrastructure.Migrations
                     JobId = table.Column<Guid>(type: "uuid", nullable: false),
                     NumberOfPosition = table.Column<int>(type: "integer", nullable: false),
                     DepartmentId = table.Column<Guid>(type: "uuid", nullable: false),
-                     
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -811,11 +818,11 @@ namespace Structure.Infrastructure.Migrations
                     CompanyId = table.Column<Guid>(type: "uuid", nullable: false),
                     EmployeeId = table.Column<Guid>(type: "uuid", nullable: false),
                     CompanyDepartmentPoliciesId = table.Column<Guid>(type: "uuid", nullable: false),
-                   
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -847,11 +854,11 @@ namespace Structure.Infrastructure.Migrations
                     DepartmentId = table.Column<Guid>(type: "uuid", nullable: false),
                     JobId = table.Column<Guid>(type: "uuid", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                   
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    EditedBy = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EditedAt = table.Column<Guid>(type: "uuid", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -940,22 +947,23 @@ namespace Structure.Infrastructure.Migrations
                 column: "CountriesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Department_CompanyId",
+                name: "IX_Department_CompanyId_ManagerId",
                 schema: "Structure",
                 table: "Department",
-                column: "CompanyId");
+                columns: new[] { "CompanyId", "ManagerId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Department_departmentId",
+                name: "IX_Department_Name_CompanyId",
                 schema: "Structure",
                 table: "Department",
-                column: "departmentId");
+                columns: new[] { "Name", "CompanyId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Department_EmployeeInformationsEmployeeId_EmployeeInformati~",
+                name: "IX_Department_ParentId",
                 schema: "Structure",
                 table: "Department",
-                columns: new[] { "EmployeeInformationsEmployeeId", "EmployeeInformationsCompanyId" });
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DepartmentsJobs_DepartmentId",
@@ -1060,13 +1068,15 @@ namespace Structure.Infrastructure.Migrations
                 column: "RelativeRelationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InjuryAndDeathRegistrations_CompaniesEmployeeInformationsEm~",
-                table: "InjuryAndDeathRegistrations",
+                name: "IX_InjuryAndDeathRegistration_CompaniesEmployeeInformationsEmp~",
+                schema: "Structure",
+                table: "InjuryAndDeathRegistration",
                 columns: new[] { "CompaniesEmployeeInformationsEmployeeId", "CompaniesEmployeeInformationsCompanyId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_InjuryAndDeathRegistrations_InjuryTypesId",
-                table: "InjuryAndDeathRegistrations",
+                name: "IX_InjuryAndDeathRegistration_InjuryTypesId",
+                schema: "Structure",
+                table: "InjuryAndDeathRegistration",
                 column: "InjuryTypesId");
 
             migrationBuilder.CreateIndex(
@@ -1114,7 +1124,8 @@ namespace Structure.Infrastructure.Migrations
                 schema: "Structure");
 
             migrationBuilder.DropTable(
-                name: "InjuryAndDeathRegistrations");
+                name: "InjuryAndDeathRegistration",
+                schema: "Structure");
 
             migrationBuilder.DropTable(
                 name: "WorkHistory",
@@ -1129,7 +1140,8 @@ namespace Structure.Infrastructure.Migrations
                 schema: "Structure");
 
             migrationBuilder.DropTable(
-                name: "TerminationReasons");
+                name: "TerminationReasons",
+                schema: "Structure");
 
             migrationBuilder.DropTable(
                 name: "DocumentType",
@@ -1140,7 +1152,8 @@ namespace Structure.Infrastructure.Migrations
                 schema: "Structure");
 
             migrationBuilder.DropTable(
-                name: "InjuryTypes");
+                name: "InjuryTypes",
+                schema: "Structure");
 
             migrationBuilder.DropTable(
                 name: "Department",
@@ -1163,14 +1176,16 @@ namespace Structure.Infrastructure.Migrations
                 schema: "Structure");
 
             migrationBuilder.DropTable(
-                name: "CompanyEmployeeStatuses");
+                name: "CompanyEmployeeStatus",
+                schema: "Structure");
 
             migrationBuilder.DropTable(
                 name: "Employee",
                 schema: "Structure");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Role",
+                schema: "Structure");
 
             migrationBuilder.DropTable(
                 name: "Companies",

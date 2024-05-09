@@ -5,6 +5,8 @@ using Structure.API.Controllers.DepartmentControll.Response;
 using Structure.Domain.Aggregate.DepartmentsaAggregate.Models;
 using Structure.Domain.Interfaces.Repository;
 using System.Text;
+using Utility;
+using Utility.GlobalException;
 
 namespace Structure.API.Controllers.DepartmentControll
 {
@@ -22,15 +24,22 @@ namespace Structure.API.Controllers.DepartmentControll
         [HttpPost("addDepartment")]
         public async Task<IActionResult> AddDepartment([FromForm] addDepartmentDto departmentDto)
         {
-            if (ModelState.IsValid)
+             
+            if(ModelState.IsValid)
             {
-                Department department=new Department(departmentDto.Name,departmentDto.Description,departmentDto.companyId);
+                 Department department = new Department(departmentDto.Name, departmentDto.Description, departmentDto.companyId);
 
-          var result=await  _unitOfWork.DepartmentRepository.AddDepartment(department);
+                var result = await _unitOfWork.DepartmentRepository.AddDepartment(department);
+                return Ok(result);
 
-            return Ok(result);  
             }
-            return NotFound("some error");
+                
+            else
+                return BadRequest("some error occured");
+               
+            
+             
+             
           
         }
 
@@ -47,6 +56,11 @@ namespace Structure.API.Controllers.DepartmentControll
             };
             return Ok(dep);
         }
+    }
+
+    class GlobalExecption :Exception
+    {
+
     }
    
    

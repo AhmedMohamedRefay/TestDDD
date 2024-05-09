@@ -8,6 +8,7 @@ using Structure.Domain.Aggregate.CompanyAggregate.Models;
 using Structure.Domain.Interfaces.Repository;
 using Structure.Infrastructure.Services;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Runtime.ConstrainedExecution;
@@ -77,17 +78,44 @@ namespace Structure.API.Controllers
 
         }
 
-        [HttpPatch("UpdateCompanyProfile")]
-        public async Task<IActionResult> updateCompany([FromBody] updateCompanyDto companyDto)
+        [HttpPatch("UpdateCompanyProfile/{id}")]
+        public async Task<IActionResult> updateCompany(Guid id,[FromBody] updateCompanyDto companyDto)
         {
 
-           Company company=new Company();
-           company= company.updateCompany(companyDto.Id,companyDto.Name,companyDto.Description,companyDto.CommercialRegisterationNo,
-                companyDto.SocialInsuranceSubscriptionNumber,companyDto.CommercialRegistrationStartDate,companyDto.UnifiedNationalNumber,companyDto.CommercialRegistrationExpireDate);
-          
+            var company=_unitOfWork.CompanyRepository.GetCompany(id);
+            company.updateCompany(companyDto.Name,companyDto.Description,companyDto.CommercialRegisterationNo,
+                                  companyDto.SocialInsuranceSubscriptionNumber,companyDto.CommercialRegistrationStartDate,
+                                  companyDto.UnifiedNationalNumber,companyDto.CommercialRegistrationExpireDate);
+
             var result = await _unitOfWork.CompanyRepository.updateCompany(company);
 
             return Ok(result);
+        }
+
+        [HttpGet("GetsubSidairy/{id}")]  
+        public async Task<IActionResult> GetCompanysub(Guid id)
+        { 
+            // Your actual Business logic   
+            // End the watch  
+            
+           
+            var result=await _unitOfWork.CompanyRepository.GetCompanies(id);
+            if (result != null)
+            {
+                var Dto = new companyListDto
+                {
+                    Name = result.Select(e => e.Name).FirstOrDefault()
+                };
+                Dto.subSidaryName = new List<string>();
+                foreach (var company in result.Select(x => x.Companies))
+                {
+                    Dto.subSidaryName.Add(company.Where(e => e.ParentId == id).Select(c => c.Name).FirstOrDefault());
+                    // Dto.subSidaryName=[company.Select(x=>x.Name).FirstOrDefault()];
+                }  
+                return Ok(Dto);
+            }
+            return BadRequest("Not company exists");
+          
         }
     }
 }

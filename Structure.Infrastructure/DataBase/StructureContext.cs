@@ -11,6 +11,7 @@ using Structure.Domain.Aggregate.EmployeeAggregate.Models;
 using Structure.Domain.Aggregate.EmployeePositionsAggregate.Models;
 using Structure.Domain.Aggregate.JobAggregate.Models;
 using Structure.Domain.Aggregate.OccupationAggregate.Models;
+using Structure.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Structure.Infrastructure.DataBase
 {
@@ -47,6 +49,7 @@ namespace Structure.Infrastructure.DataBase
 
             modelBuilder.Entity<EmployeePositions>().HasKey(s => new { s.DepartmentId, s.JobId, s.EmployeeId, s.CompanyId });
 
+             
 
             modelBuilder.Entity<CompanyDepartmentPoliciesIsReaded>().HasKey(s => new { s.CompanyId, s.EmployeeId, s.CompanyDepartmentPoliciesId });
 
@@ -62,10 +65,31 @@ namespace Structure.Infrastructure.DataBase
 
 
 
-
-
-
         }
+
+        //public override int SaveChanges()
+        //{
+        //    var entries = ChangeTracker
+        //        .Entries()
+        //        .Where(e => e.Entity is EntityBase && (
+        //                e.State == EntityState.Added
+        //                || e.State == EntityState.Modified));
+
+        //    foreach (var entityEntry in entries)
+        //    {
+        //        // ((EntityBase)entityEntry.Entity).UpdatedAt = DateTime.Now;
+
+        //        ((EntityBase)entityEntry.Entity).setUpdatedAt();
+
+        //        if (entityEntry.State == EntityState.Added)
+        //        {
+        //            ((EntityBase)entityEntry.Entity).setCreatedAt();
+        //          //  ((EntityBase)entityEntry.Entity).CreatedAt = DateTime.Now;
+        //        }
+        //    }
+
+        //    return base.SaveChanges();
+        //}
         public virtual DbSet<Company> companies { get; set; }
 
         public virtual DbSet<CompanyStatus> companyStatuses { get; set; }

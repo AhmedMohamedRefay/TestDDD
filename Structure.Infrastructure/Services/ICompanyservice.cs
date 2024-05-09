@@ -10,5 +10,6 @@ namespace Structure.Infrastructure.Services
     public interface ICompanyservice
     {
         string GetPath(IFormFile file);
+       
     }
 }

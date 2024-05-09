@@ -44,7 +44,7 @@ namespace Structure.Domain.Aggregate.DepartmentsaAggregate.Models
 
         public Department()
         {
-            
+            _departments = new List<Department>();
         }
         public Department(string name,string description,Guid companyId)
         {
@@ -53,6 +53,7 @@ namespace Structure.Domain.Aggregate.DepartmentsaAggregate.Models
             this.Name = name;
             this.Description = description;
             this.CompanyId= companyId;
+            _departments=new List<Department> ();
         }
         public Department(string name, string? description, string? logo, string? officePhoneNumber,
             Guid? parentId, Guid? managerId, Guid companyId)
@@ -64,6 +65,7 @@ namespace Structure.Domain.Aggregate.DepartmentsaAggregate.Models
             ParentId = parentId;
             ManagerId = managerId;
             CompanyId = companyId;
+            _departments = new List<Department>();
         }
 
         public virtual IReadOnlyList<CompanyDepartmentPolicies> companyDepartmentsPolicy => _companyDepartmentsPolicy;

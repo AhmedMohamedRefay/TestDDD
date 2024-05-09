@@ -77,12 +77,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Facebook")
                         .HasColumnType("text");
 
@@ -119,6 +113,12 @@ namespace Structure.Infrastructure.Migrations
 
                     b.Property<string>("UnifiedNationalNumber")
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Website")
                         .HasColumnType("text");
@@ -180,18 +180,18 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -232,12 +232,6 @@ namespace Structure.Infrastructure.Migrations
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
-
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -280,6 +274,12 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
                     b.HasKey("EmployeeId", "CompanyId");
 
                     b.HasIndex("CompanyId");
@@ -316,12 +316,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<DateTime>("EfeectiveDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -336,6 +330,12 @@ namespace Structure.Infrastructure.Migrations
 
                     b.Property<int>("TerminationReasonsId")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -378,12 +378,6 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
@@ -399,6 +393,12 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -426,12 +426,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
@@ -440,6 +434,12 @@ namespace Structure.Infrastructure.Migrations
 
                     b.Property<int>("NumberOfPosition")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("JobId", "DerpatmentId");
 
@@ -473,18 +473,18 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -512,17 +512,17 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("CompanyId", "EmployeeId", "CompanyDepartmentPoliciesId");
 
@@ -551,12 +551,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -576,14 +570,20 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
                     b.HasIndex("CompanyId", "ManagerId");
+
+                    b.HasIndex("Name", "CompanyId")
+                        .IsUnique();
 
                     b.ToTable("Department", "Structure");
                 });
@@ -743,12 +743,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
@@ -768,6 +762,12 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -800,12 +800,6 @@ namespace Structure.Infrastructure.Migrations
 
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
-
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -861,6 +855,12 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
@@ -895,12 +895,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<int>("DocumentTypeId")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
@@ -916,6 +910,12 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -945,12 +945,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<int>("DocumentTypeId")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<DateTime>("ExpireDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -969,6 +963,12 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -992,12 +992,6 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("EmployeeId")
@@ -1030,6 +1024,12 @@ namespace Structure.Infrastructure.Migrations
 
                     b.Property<int>("RelativeRelationId")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -1072,12 +1072,6 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uuid");
 
@@ -1093,6 +1087,12 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<string>("JobPosition")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -1121,12 +1121,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
@@ -1135,6 +1129,12 @@ namespace Structure.Infrastructure.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("DepartmentId", "JobId", "EmployeeId", "CompanyId");
 
@@ -1159,12 +1159,6 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -1173,6 +1167,12 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("OccupationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -1198,18 +1198,18 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("EditedAt")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditedBy")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 

@@ -50,5 +50,7 @@ namespace Structure.Domain.Aggregate.CompanyAggregate.Input
 
         public Guid? CMO { get; set; }
 
+        public Guid? ParentId { get; set;}
+
     }
 }

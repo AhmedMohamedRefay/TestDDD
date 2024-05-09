@@ -9,9 +9,9 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structure.Infrastructure.DataBase
+namespace Structure.Infrastructure.EntityConfigurations
 {
-    public class DepartmentConfiguration:IEntityTypeConfiguration<Department>
+    public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
     {
         public void Configure(EntityTypeBuilder<Department> modelBuilder)
         {
@@ -29,9 +29,9 @@ namespace Structure.Infrastructure.DataBase
            .HasForeignKey(s => new { s.CompanyId, s.ManagerId });
 
             modelBuilder
-        .HasIndex(d => d.Name)
+        .HasIndex(d => new { d.Name,d.CompanyId })
         .IsUnique();
 
-         }
+        }
     }
 }

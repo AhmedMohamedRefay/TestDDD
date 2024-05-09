@@ -23,6 +23,8 @@ namespace Structure.Infrastructure.Repository.CompanyRepository
         public async Task<Company> Addcompany(Company company)
         {
             await _context.AddAsync(company);
+
+           
             if(company.StatusId==null)
             {
                 company.addStatus(1);
@@ -31,13 +33,19 @@ namespace Structure.Infrastructure.Repository.CompanyRepository
             {
                 company.setInsuranceNumber(company.SocialInsuranceSubscriptionNumber);
             }
-
+            if(company.ParentId!=null)
+            {
+               var c= _context.companies.Find(company.ParentId);
+                c.AddSubSidary(company);
+            }
             
             Department department = new Department();
             department.setHigherManagerName();
             department.setCompany(company);
+          //  company.setCreatedAt();
             await _context.Departments.AddAsync(department);
             await _context.SaveChangesAsync();
+           // company.setCreatedAt();
             return company;
         }
 
@@ -55,15 +63,28 @@ namespace Structure.Infrastructure.Repository.CompanyRepository
 
         public async Task<Company> updateCompany( Company company)
         {
-             var comp=_context.companies.Where(x=>x.Id==company.Id).Select(e=>e.Id).FirstOrDefault();
-            if(comp!=null)
+   
+            if(company!=null)
             {
-                _context.companies.Update(company);
+                
+                 
                await _context.SaveChangesAsync();
                 return company;
             }
             throw new Exception("Not Found");
 
+            
+        }
+
+        public Company GetCompany(Guid Id)
+        {
+            return _context.companies.Find(Id);
+        }
+
+        public async Task<List<Company>> GetCompanies(Guid Id)
+        {
+           var companies = await _context.companies.Where(c=>c.Id==Id).AsNoTracking().ToListAsync();
+           return companies;
         }
     }
 }

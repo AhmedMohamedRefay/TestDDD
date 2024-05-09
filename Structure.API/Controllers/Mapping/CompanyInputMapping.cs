@@ -42,7 +42,9 @@ namespace Structure.API.Controllers.Mapping
 
                 CFO = company.CFO,
 
-                CMO = company.CMO
+                CMO = company.CMO,
+                ParentId   = company.ParentId,
+               
             };
 
             return input;

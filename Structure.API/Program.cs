@@ -4,10 +4,13 @@ using Structure.Domain.Interfaces.Repository;
 using Structure.Infrastructure.DataBase;
 using Structure.Infrastructure.Repository.CompanyRepository;
 using Structure.Infrastructure.Services;
+using Utility.GlobalException;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddMvc().AddNewtonsoftJson
+    (options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,6 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
 app.UseHttpsRedirection();
 

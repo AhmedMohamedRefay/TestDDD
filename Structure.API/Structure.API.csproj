@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,9 +20,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Structure.Domain\Structure.Domain.csproj" />
     <ProjectReference Include="..\Structure.Infrastructure\Structure.Infrastructure.csproj" />
+    <ProjectReference Include="..\Utility\Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\CompanyControll\" />
     <Folder Include="Resources\Images\" />
   </ItemGroup>
 

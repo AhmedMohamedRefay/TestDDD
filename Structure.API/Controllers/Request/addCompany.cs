@@ -23,7 +23,7 @@ namespace Structure.API.Controllers.Request
 
         public string? InstitutionNumber { get; set; }
 
-       
+       public Guid? ParentId {  get; set; }
 
         [RegularExpression(@"^(\d{3}-\d{3}-\d{3})|(\d{9})$")]
         public string? SocialInsuranceSubscriptionNumber { get; set; }
