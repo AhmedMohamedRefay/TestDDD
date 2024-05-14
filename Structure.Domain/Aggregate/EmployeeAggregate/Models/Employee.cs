@@ -18,13 +18,13 @@ namespace Structure.Domain.Aggregate.EmployeeAggregate.Models
         public string Name { get; private set; }
         public string PhotoPath { get; private set; }
 
-        public string NationalIDNumber { get; private set; }
+        public string? NationalIDNumber { get; private set; }
 
-        public string SaudiVisaNumber { get; private set; }
+        public string? SaudiVisaNumber { get; private set; }
 
         public string PassportNumber { get; private set; }
 
-        public DateOnly DateOfBirth { get; private set; }
+        public DateTime DateOfBirth { get; private set; }
 
         public string Address { get; private set; }
         public string PrimaryPhoneNumber { get; private set; }
@@ -33,28 +33,28 @@ namespace Structure.Domain.Aggregate.EmployeeAggregate.Models
 
         public string Email { get; private set; }
 
-        public string SocialInsuranceSubscriptionNumber { get; private set; }
+        public string? SocialInsuranceSubscriptionNumber { get; private set; }
 
-        public Guid MainCompanyId { get; private set; }
+        public Guid? MainCompanyId { get; private set; }
 
-        public int NationalityId { get; private set; }
+        public int? NationalityId { get; private set; }
 
-        public int MaritalStatusId { get; private set; }
+       public int? MaritalStatusId { get; private set; }
 
-        public int ReligionId { get; private set; }
+        public int? ReligionId { get; private set; }
 
         public int GenderId { get; private set; }
 
         #region NavigationProprty
-        public virtual Company Company { get; private set; }
+        //  public virtual Company? Company { get; private set; }
 
-        public virtual Countries Country { get; private set; }
+        //public virtual Countries? Country { get; private set; }
 
-        public virtual MaritalStatus MaritalStatus { get; private set; }
+        //public virtual MaritalStatus? MaritalStatus { get; private set; }
 
-        public virtual Religion Religion { get; private set; }
+        //public virtual Religion? Religion { get; private set; }
 
-        public virtual Gender Gender { get; private set; }
+        //public virtual Gender? Gender { get; private set; }
 
         #endregion
 
@@ -78,6 +78,27 @@ namespace Structure.Domain.Aggregate.EmployeeAggregate.Models
         public virtual IReadOnlyCollection<WorkHistory> workHistories => _workHistories;
 
         private readonly List<CompaniesEmployeeInformations> _companiesEmployeeInformations;
+        public Employee()
+        {
+            _companiesEmployeeInformations= new List<CompaniesEmployeeInformations>();
+        }
+        public Employee(string name, string photoPath, string passportNumber, 
+                        DateTime dateOfBirth, string address, string primaryPhoneNumber, 
+                        string secondaryPhonenNumber, string email,int nationalityId,int genderId)
+        {
+            Name = name;
+            PhotoPath = photoPath;
+            PassportNumber = passportNumber;
+           DateOfBirth = dateOfBirth;
+            Address = address;
+            PrimaryPhoneNumber = primaryPhoneNumber;
+            SecondaryPhonenNumber = secondaryPhonenNumber;
+            Email = email;
+            NationalityId = nationalityId;
+            GenderId = genderId;
+            _companiesEmployeeInformations = new List<CompaniesEmployeeInformations>();
+        }
+
         public virtual IReadOnlyCollection<CompaniesEmployeeInformations> CompaniesEmployeeInformations => _companiesEmployeeInformations;
     }
 }

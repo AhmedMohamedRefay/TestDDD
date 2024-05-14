@@ -1,4 +1,6 @@
 ﻿using Structure.Domain.Aggregate.CompanyAggregate.Models;
+using Structure.Domain.Aggregate.CompanyEmployeeInfromationAggregate.Lookup;
+using Structure.Domain.Aggregate.DepartmentsaAggregate.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +20,14 @@ namespace Structure.Domain.Interfaces.Repository
         Company GetCompany(Guid Id);
 
         Task<List<Company>> GetCompanies(Guid Id);
+
+
+        string GetCompanyName(Guid Id);
+
+        List<Company> subCompanies(Guid Id);
+
+        Task<Role> addAsyncRole(Role role);
+
+        Task<CompanyDepartmentPolicies> addPolicyAsync(CompanyDepartmentPolicies policy);
     }
 }

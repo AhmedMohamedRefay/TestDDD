@@ -8,6 +8,7 @@ using Structure.Domain.Aggregate.DepartmentJobsAggregate.Models;
 using Structure.Domain.Aggregate.DepartmentsaAggregate.Models;
 using Structure.Domain.Aggregate.EmployeeAggregate.Lookup;
 using Structure.Domain.Aggregate.EmployeeAggregate.Models;
+using Structure.Domain.Aggregate.EmployeePositionsAggregate.Lookup;
 using Structure.Domain.Aggregate.EmployeePositionsAggregate.Models;
 using Structure.Domain.Aggregate.JobAggregate.Models;
 using Structure.Domain.Aggregate.OccupationAggregate.Models;
@@ -44,7 +45,7 @@ namespace Structure.Infrastructure.DataBase
             //Configure Primary Key using HasKey method
             modelBuilder.Entity<CompaniesEmployeeInformations>().HasKey(s => new { s.EmployeeId, s.CompanyId });
 
-            modelBuilder.Entity<DepartmentsJobs>().HasKey(s => new { s.JobId, s.DerpatmentId });
+            modelBuilder.Entity<DepartmentsJobs>().HasKey(s => new { s.JobId, s.DepartmentId });
 
 
             modelBuilder.Entity<EmployeePositions>().HasKey(s => new { s.DepartmentId, s.JobId, s.EmployeeId, s.CompanyId });
@@ -53,15 +54,15 @@ namespace Structure.Infrastructure.DataBase
 
             modelBuilder.Entity<CompanyDepartmentPoliciesIsReaded>().HasKey(s => new { s.CompanyId, s.EmployeeId, s.CompanyDepartmentPoliciesId });
 
-            modelBuilder.Entity<EmployeePositions>()
-           .HasOne(s => s.DepartmentsJobs)
-           .WithMany(g => g.employeePositions)
-           .HasForeignKey(s => new { s.DepartmentId, s.JobId });
+           // modelBuilder.Entity<EmployeePositions>()
+           //.HasOne(s => s.DepartmentsJobs)
+           //.WithMany(g => g.employeePositions)
+           //.HasForeignKey(s => new { s.DepartmentId, s.JobId });
 
-            modelBuilder.Entity<EmployeePositions>()
-           .HasOne(s => s.CompaniesEmployeeInformations)
-           .WithMany(g => g.employeePositions)
-           .HasForeignKey(s => new { s.CompanyId, s.EmployeeId });
+           // modelBuilder.Entity<EmployeePositions>()
+           //.HasOne(s => s.CompaniesEmployeeInformations)
+           //.WithMany(g => g.employeePositions)
+           //.HasForeignKey(s => new { s.CompanyId, s.EmployeeId });
 
 
 
@@ -90,6 +91,8 @@ namespace Structure.Infrastructure.DataBase
 
         //    return base.SaveChanges();
         //}
+
+        public virtual DbSet<WorkType> WorkTypes { get; set; }
         public virtual DbSet<Company> companies { get; set; }
 
         public virtual DbSet<CompanyStatus> companyStatuses { get; set; }

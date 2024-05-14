@@ -224,7 +224,6 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("ContractDocomentPath")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
@@ -237,7 +236,7 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("EmploymentContractInDays")
+                    b.Property<int?>("EmploymentContractInDays")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("EmploymentStartDate")
@@ -249,23 +248,22 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsFirstLogin")
+                    b.Property<bool?>("IsFirstLogin")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsTerminated")
+                    b.Property<bool?>("IsTerminated")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Performance")
+                    b.Property<decimal?>("Performance")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("ProbationaryPeriodInDays")
+                    b.Property<int?>("ProbationaryPeriodInDays")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("ProbationaryPeriodIsActive")
+                    b.Property<bool?>("ProbationaryPeriodIsActive")
                         .HasColumnType("boolean");
 
                     b.Property<int>("RoleId")
@@ -414,16 +412,13 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid>("JobId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("DerpatmentId")
+                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("Id")
@@ -441,7 +436,7 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid");
 
-                    b.HasKey("JobId", "DerpatmentId");
+                    b.HasKey("JobId", "DepartmentId");
 
                     b.HasIndex("DepartmentId");
 
@@ -464,9 +459,6 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("DerpartmentId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -786,20 +778,14 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -811,10 +797,10 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid>("MainCompanyId")
+                    b.Property<Guid?>("MainCompanyId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("MaritalStatusId")
+                    b.Property<int?>("MaritalStatusId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -822,10 +808,9 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("NationalIDNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("NationalityId")
+                    b.Property<int?>("NationalityId")
                         .HasColumnType("integer");
 
                     b.Property<string>("PassportNumber")
@@ -840,11 +825,10 @@ namespace Structure.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("ReligionId")
+                    b.Property<int?>("ReligionId")
                         .HasColumnType("integer");
 
                     b.Property<string>("SaudiVisaNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("SecondaryPhonenNumber")
@@ -852,7 +836,6 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("SocialInsuranceSubscriptionNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -862,16 +845,6 @@ namespace Structure.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("GenderId");
-
-                    b.HasIndex("MaritalStatusId");
-
-                    b.HasIndex("ReligionId");
 
                     b.ToTable("Employee", "Structure");
                 });
@@ -1101,6 +1074,23 @@ namespace Structure.Infrastructure.Migrations
                     b.ToTable("WorkHistory", "Structure");
                 });
 
+            modelBuilder.Entity("Structure.Domain.Aggregate.EmployeePositionsAggregate.Lookup.WorkType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkType", "Structure");
+                });
+
             modelBuilder.Entity("Structure.Domain.Aggregate.EmployeePositionsAggregate.Models.EmployeePositions", b =>
                 {
                     b.Property<Guid>("DepartmentId")
@@ -1136,9 +1126,16 @@ namespace Structure.Infrastructure.Migrations
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("WorkTypeId")
+                        .HasColumnType("integer");
+
                     b.HasKey("DepartmentId", "JobId", "EmployeeId", "CompanyId");
 
-                    b.HasIndex("CompanyId", "EmployeeId");
+                    b.HasIndex("WorkTypeId");
+
+                    b.HasIndex("EmployeeId", "CompanyId");
+
+                    b.HasIndex("JobId", "DepartmentId");
 
                     b.ToTable("EmployeePositions", "Structure");
                 });
@@ -1404,49 +1401,6 @@ namespace Structure.Infrastructure.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Structure.Domain.Aggregate.EmployeeAggregate.Models.Employee", b =>
-                {
-                    b.HasOne("Structure.Domain.Aggregate.CompanyAggregate.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Structure.Domain.Aggregate.EmployeeAggregate.Lookup.Countries", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Structure.Domain.Aggregate.EmployeeAggregate.Lookup.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Structure.Domain.Aggregate.EmployeeAggregate.Lookup.MaritalStatus", "MaritalStatus")
-                        .WithMany()
-                        .HasForeignKey("MaritalStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Structure.Domain.Aggregate.EmployeeAggregate.Lookup.Religion", "Religion")
-                        .WithMany()
-                        .HasForeignKey("ReligionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-
-                    b.Navigation("Country");
-
-                    b.Navigation("Gender");
-
-                    b.Navigation("MaritalStatus");
-
-                    b.Navigation("Religion");
-                });
-
             modelBuilder.Entity("Structure.Domain.Aggregate.EmployeeAggregate.Models.EmployeeDocuments", b =>
                 {
                     b.HasOne("Structure.Domain.Aggregate.EmployeeAggregate.Lookup.DocumentType", "DocumentType")
@@ -1533,21 +1487,29 @@ namespace Structure.Infrastructure.Migrations
 
             modelBuilder.Entity("Structure.Domain.Aggregate.EmployeePositionsAggregate.Models.EmployeePositions", b =>
                 {
+                    b.HasOne("Structure.Domain.Aggregate.EmployeePositionsAggregate.Lookup.WorkType", "WorkType")
+                        .WithMany()
+                        .HasForeignKey("WorkTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Structure.Domain.Aggregate.CompanyEmployeeInfromationAggregate.Models.CompaniesEmployeeInformations", "CompaniesEmployeeInformations")
                         .WithMany("employeePositions")
-                        .HasForeignKey("CompanyId", "EmployeeId")
+                        .HasForeignKey("EmployeeId", "CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Structure.Domain.Aggregate.DepartmentJobsAggregate.Models.DepartmentsJobs", "DepartmentsJobs")
                         .WithMany("employeePositions")
-                        .HasForeignKey("DepartmentId", "JobId")
+                        .HasForeignKey("JobId", "DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CompaniesEmployeeInformations");
 
                     b.Navigation("DepartmentsJobs");
+
+                    b.Navigation("WorkType");
                 });
 
             modelBuilder.Entity("Structure.Domain.Aggregate.JobAggregate.Models.Job", b =>

@@ -11,6 +11,12 @@ namespace Structure.Domain.Interfaces.Repository
         public ICompanyRepository CompanyRepository { get; }
 
         public IDepartmentRepository DepartmentRepository { get; }
+
+        public IEmployeeRepository EmployeeRepository { get; }
+
+
+        public IJobRepository JobRepository { get; }
+        
         public Task SaveChangesAsync();
     }
 }

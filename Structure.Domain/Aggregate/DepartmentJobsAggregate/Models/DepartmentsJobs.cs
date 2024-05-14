@@ -14,7 +14,7 @@ namespace Structure.Domain.Aggregate.DepartmentJobsAggregate.Models
     [Table("DepartmentsJobs", Schema = "Structure")]
     public class DepartmentsJobs : EntityBase
     {
-        public Guid DerpatmentId { get; private set; }
+        public Guid DepartmentId { get; private set; }
 
         public Guid JobId { get; private set; }
 
@@ -26,6 +26,18 @@ namespace Structure.Domain.Aggregate.DepartmentJobsAggregate.Models
 
 
         private readonly List<EmployeePositions> _employeePositions;
+        public DepartmentsJobs()
+        {
+            _employeePositions = new List<EmployeePositions>();
+        }
+        public DepartmentsJobs(Guid derpatmentId, Guid jobId, int numberOfPosition)
+        {
+            DepartmentId = derpatmentId;
+            JobId = jobId;
+            NumberOfPosition = numberOfPosition;
+            _employeePositions = new List<EmployeePositions>();
+        }
+
         public virtual IReadOnlyCollection<EmployeePositions> employeePositions => _employeePositions;
 
     }

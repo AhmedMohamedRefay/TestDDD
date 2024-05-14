@@ -21,7 +21,21 @@ namespace Structure.Domain.Aggregate.JobAggregate.Models
 
         public virtual Occupation occupation { get; private set; }
 
-        private readonly List<DepartmentsJobs> _departmentsJobs;
+
+        public Job()
+        {
+            _departmentsJobs = new List<DepartmentsJobs>();
+        }
+        public Job(string name, string description, Guid occupationId)
+        {
+            Name = name;
+            Description = description;
+            OccupationId = occupationId;
+            _departmentsJobs = new List<DepartmentsJobs>();
+        }
+
         public virtual IReadOnlyCollection<DepartmentsJobs> departmentsJobs => _departmentsJobs;
+
+        private readonly List<DepartmentsJobs> _departmentsJobs;
     }
 }

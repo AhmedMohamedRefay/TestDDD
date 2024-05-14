@@ -19,17 +19,29 @@ namespace Structure.Domain.Aggregate.DepartmentsaAggregate.Models
 
         public Guid CompanyId { get; private set; }
 
-        public Guid DerpartmentId { get; private set; }
+        public Guid DepartmentId { get; private set; }
 
         public virtual Company Company { get; private set; }
 
         public virtual Department Department { get; private set; }
 
-
+        public CompanyDepartmentPolicies()
+        {
+            
+        }
 
 
 
         private readonly List<CompanyDepartmentPoliciesIsReaded> _CompanyDepartmentPoliciesIsReaded;
+
+        public CompanyDepartmentPolicies(string name, string description, Guid companyId, Guid departmentId)
+        {
+            Name = name;
+            Description = description;
+            CompanyId = companyId;
+            DepartmentId = departmentId;
+        }
+
         public virtual IReadOnlyCollection<CompanyDepartmentPoliciesIsReaded> CompanyDepartmentPoliciesIsReaded => _CompanyDepartmentPoliciesIsReaded;
     }
 }

@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading.Tasks;
 
 namespace Structure.Domain.Aggregate.DepartmentsaAggregate.Models
@@ -45,6 +46,8 @@ namespace Structure.Domain.Aggregate.DepartmentsaAggregate.Models
         public Department()
         {
             _departments = new List<Department>();
+
+            _departmentsJobs = new List<DepartmentsJobs>();
         }
         public Department(string name,string description,Guid companyId)
         {
@@ -66,6 +69,13 @@ namespace Structure.Domain.Aggregate.DepartmentsaAggregate.Models
             ManagerId = managerId;
             CompanyId = companyId;
             _departments = new List<Department>();
+        }
+
+        public void updateDepartment(string name,string description )
+        {
+            this.Name= name;
+            this.Description= description;
+          
         }
 
         public virtual IReadOnlyList<CompanyDepartmentPolicies> companyDepartmentsPolicy => _companyDepartmentsPolicy;

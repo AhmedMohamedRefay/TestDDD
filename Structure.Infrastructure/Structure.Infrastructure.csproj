@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataBase\EntitesConfiguration\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
 

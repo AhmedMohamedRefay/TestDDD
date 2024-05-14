@@ -14,6 +14,10 @@ namespace Structure.Domain.Interfaces.Repository
 
         Task<Department> getDepartmentAsync(Guid companyId,Guid id);
 
+        Task<ICollection< Department>> getDepartmentByCompanyId(Guid companyId);
+
+        Task<Department> updateDepartment(Department department);
+        Task<ICollection<Department>> getSubDepartments(Guid companyId,Guid DepId);
        // Department getHigherManagementDepartment(Guid companyId,string name);
     }
 }

@@ -1,5 +1,6 @@
 ﻿ using Microsoft.EntityFrameworkCore;
 using Structure.Domain.Aggregate.CompanyAggregate.Models;
+using Structure.Domain.Aggregate.CompanyEmployeeInfromationAggregate.Lookup;
 using Structure.Domain.Aggregate.DepartmentsaAggregate.Models;
 using Structure.Domain.Interfaces.Repository;
 using Structure.Infrastructure.DataBase;
@@ -83,8 +84,33 @@ namespace Structure.Infrastructure.Repository.CompanyRepository
 
         public async Task<List<Company>> GetCompanies(Guid Id)
         {
-           var companies = await _context.companies.Where(c=>c.Id==Id).AsNoTracking().ToListAsync();
+           var companies = await _context.companies.Where(c=>c.Id==Id).Include(y=>y.Companies).AsNoTracking().ToListAsync();
            return companies;
+        }
+
+        public string GetCompanyName(Guid Id)
+        {
+            return _context.companies.Where(e=>e.Id==Id).Select(e => e.Name).FirstOrDefault();
+        }
+
+        public List<Company> subCompanies(Guid parentId)
+        {
+           return _context.companies.Where(e => e.ParentId == parentId).ToList();
+        }
+
+        public async Task<Role> addAsyncRole(Role role)
+        {
+           await _context.Roles.AddAsync(role);
+            await _context.SaveChangesAsync();
+        
+            return role;
+                      
+        }
+
+        public async Task<CompanyDepartmentPolicies> addPolicyAsync(CompanyDepartmentPolicies policy)
+        {
+            await _context.CompanyDepartmentPolicies.AddAsync(policy);
+            return policy;
         }
     }
 }

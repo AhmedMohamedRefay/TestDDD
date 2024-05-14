@@ -2,6 +2,8 @@
 using Structure.Infrastructure.DataBase;
 using Structure.Infrastructure.Repository.CompanyRepository;
 using Structure.Infrastructure.Repository.DepartmentsRepository;
+using Structure.Infrastructure.Repository.EmployeeRepository;
+using Structure.Infrastructure.Repository.JobRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,8 @@ namespace Structure.Infrastructure.Repository
 
         private ICompanyRepository _companyRepository;
         private IDepartmentRepository _departmentRepository;
-
+        private IEmployeeRepository _employeeRepository;
+        private IJobRepository _jobRepository;
         private readonly StructureContext _dbContext;
         private bool disposed = false;
          
@@ -28,6 +31,11 @@ namespace Structure.Infrastructure.Repository
         public ICompanyRepository CompanyRepository => _companyRepository ??= new companyRepository(_dbContext);
 
         public IDepartmentRepository DepartmentRepository => _departmentRepository ??= new departmentRepository(_dbContext);
+
+        public IEmployeeRepository EmployeeRepository => _employeeRepository??=new employeeRepository(_dbContext);
+
+        public IJobRepository JobRepository => _jobRepository ??= new jobRepository(_dbContext);
+
         public void Dispose()
         {
             Dispose(true);

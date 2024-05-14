@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Structure.Domain.Aggregate.CompanyAggregate.Models;
 using Structure.Domain.Aggregate.DepartmentsaAggregate.Models;
 using Structure.Domain.Interfaces.Repository;
 using Structure.Infrastructure.DataBase;
@@ -58,6 +59,35 @@ namespace Structure.Infrastructure.Repository.DepartmentsRepository
             var result=_context.Departments.Where(depart=> depart.CompanyId==companyId&& depart.Name==name).FirstOrDefault();
 
             return result;
+        }
+
+        public async Task<ICollection<Department>> getDepartmentByCompanyId(Guid companyId)
+        {
+            var departments=await _context.Departments.Where(dep=>dep.CompanyId==companyId).ToListAsync();
+
+            return departments;
+        }
+
+        public async Task<ICollection<Department>> getSubDepartments(Guid companyId, Guid DepId)
+        {
+             var subDepartment=await _context.Departments
+                .Where(dep=>dep.CompanyId==companyId&&dep.ParentId==DepId)
+                
+                .ToListAsync();
+
+            return subDepartment;
+        }
+
+        public async Task<Department> updateDepartment(Department department)
+        {
+            if (department != null)
+            {
+
+
+                await _context.SaveChangesAsync();
+                return department;
+            }
+            throw new Exception("Not Found");
         }
     }
 }

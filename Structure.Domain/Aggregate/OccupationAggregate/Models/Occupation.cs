@@ -19,8 +19,25 @@ namespace Structure.Domain.Aggregate.OccupationAggregate.Models
         public string Description { get; private set; }
 
         private readonly List<Job> _Job;
+
+        public Occupation()
+        {
+            _Job = new List<Job>();
+        }
+        public Occupation(string name, string description)
+        {
+            Name = name;
+            Description = description;
+            _Job = new List<Job>();
+        }
+
         public virtual IReadOnlyCollection<Job> Job => _Job;
 
+
+        public void addJob(Job job)
+        {
+            _Job.Add(job);
+        }
     }
 
 }

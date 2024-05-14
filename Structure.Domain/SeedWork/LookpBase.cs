@@ -9,5 +9,10 @@ namespace Structure.Domain.SeedWork
     public class LookpBase
     {
         public int Id { get; protected set; }
+
+        public void setId(int id)
+        {
+            this.Id = id;
+        }
     }
 }

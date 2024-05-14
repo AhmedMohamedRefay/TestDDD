@@ -12,6 +12,9 @@ namespace Structure.Domain.Aggregate.EmployeeAggregate.Lookup
     public class Gender : LookpBase
     {
         public string Name { get; protected set; }
-
+        public Gender():base()
+        {
+            
+        }
     }
 }
